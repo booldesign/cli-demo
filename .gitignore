@@ -1,0 +1,41 @@
+### Backup ###
+*.bak
+
+### Go ###
+# Binaries for programs and plugins
+*.exe
+*.exe~
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go Patch
+vendor/
+
+# Go Tool
+*.svg
+
+### JetBrains ###
+.idea
+
+# Git
+
+# hooks
+githooks/
+
+### Start by Project ###
+
+# log
+logs/*
+*.log
+
+# Output
+/_output
+/_debug
+
+# Other
+.DS_Store
+*.env
