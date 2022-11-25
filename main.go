@@ -1,14 +1,13 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
 	"os"
 	"time"
 
-	"github.com/booldesign/cli-demo/cmd"
-	"github.com/booldesign/cli-demo/library/log"
-	"github.com/booldesign/cli-demo/library/util"
+	"github.com/booldesign/cli-demo/crontab"
+	"github.com/booldesign/cli-demo/daemon"
 
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
 
@@ -26,13 +25,6 @@ const (
 )
 
 func main() {
-
-	w, err := util.CreateFile("./logs/" + APPName)
-	if err != nil {
-		panic(err)
-	}
-	log.LoadLogrus(w)
-
 	app := &cli.App{
 		Name:     APPName,
 		Version:  APPVersion,
@@ -46,8 +38,8 @@ func main() {
 		},
 		Copyright: "Copyright (c) 2022 BoolDesign",
 		Commands: []*cli.Command{
-			cmd.Crontab,
-			cmd.Daemon,
+			crontab.Crontab,
+			daemon.Daemon,
 		},
 	}
 

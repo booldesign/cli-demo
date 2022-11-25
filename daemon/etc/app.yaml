@@ -1,0 +1,12 @@
+App:
+  name: cli demo
+  mode: debug
+  log:
+    Path: ./logs/
+    level: debug
+DB:
+  Url: root:1234567a@tcp(127.0.0.1:3306)/usercenter?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+Cache:
+  Addr: 127.0.0.1:6379
+  Pass: 1234567a
+  DB: 1

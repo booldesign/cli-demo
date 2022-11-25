@@ -2,8 +2,9 @@ package hook
 
 import (
 	"flag"
-	"github.com/sirupsen/logrus"
 	"testing"
+
+	"github.com/sirupsen/logrus"
 )
 
 /**

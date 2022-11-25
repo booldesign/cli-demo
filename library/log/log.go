@@ -26,10 +26,15 @@ logrus 支持更多的日志级别：
 */
 
 // LoadLogrus 加载日志库
-func LoadLogrus(w io.Writer) {
+func LoadLogrus(level string, w io.Writer) {
 	logrus.SetFormatter(&LogFormatter{})
-	logrus.SetReportCaller(true)       // 打印 log 产生的位置
-	logrus.SetLevel(logrus.DebugLevel) // debug
+	logrus.SetReportCaller(true) // 打印 log 产生的位置
+	//设置日志级别
+	logLevel, err := logrus.ParseLevel(level)
+	if err != nil {
+		logLevel = logrus.WarnLevel
+	}
+	logrus.SetLevel(logLevel) // debug
 
 	//设置日志输出多端
 	out := []io.Writer{os.Stdout}

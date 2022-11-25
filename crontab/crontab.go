@@ -1,14 +1,14 @@
-package cmd
+package crontab
 
 import (
-	"fmt"
-	"github.com/sirupsen/logrus"
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
+
+	"github.com/booldesign/cli-demo/crontab/internal/logic"
 
 	"github.com/robfig/cron/v3"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
 
@@ -43,10 +43,12 @@ func runCron(ctx *cli.Context) error {
 
 	logrus.Info("启动 crontab 服务...")
 
+	traversal := logic.NewTraversalLogic(nil, nil)
+
 	// 执行指定方法
 	if f := ctx.String("func"); f != "" {
 		var jobFuncList = map[string]func(){
-			"traversalConsole": traversalConsole,
+			"traversalConsole": traversal.Traversal,
 		}
 		if execFunc, ok := jobFuncList[f]; ok {
 			execFunc()
@@ -60,11 +62,12 @@ func runCron(ctx *cli.Context) error {
 
 	// 定时脚本
 	cron := cron.New(cron.WithSeconds())
-	if _, err := cron.AddFunc("* * * * * *", traversalConsole); err != nil {
+	if _, err := cron.AddFunc("* * * * * *", traversal.Traversal); err != nil {
 		logrus.Error("traversalConsole 执行错误，err:", err)
 	}
 
 	cron.Start()
+
 	sig := make(chan os.Signal)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
 	select {
@@ -74,8 +77,4 @@ func runCron(ctx *cli.Context) error {
 	}
 
 	return nil
-}
-
-func traversalConsole() {
-	fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
 }

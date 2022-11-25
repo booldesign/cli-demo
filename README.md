@@ -4,7 +4,7 @@
 https://cli.urfave.org/v2/getting-started/
 
 ## cron定时任务
-https://learnku.com/docs/learngo/1.0/cron-ding-shi-ren-wu/13973
+https://github.com/robfig/cron
 
 ## flag设置
 ```
@@ -22,9 +22,9 @@ https://learnku.com/docs/learngo/1.0/cron-ding-shi-ren-wu/13973
 
 需要先传全局GLOBAL OPTIONS
 ```
-go run main.go daemon --lang chinese weijianwen
+go run main.go daemon
 或
-go run main.go daemon -l chinese weijianwen
+go run main.go daemon -db "root:1234567a@tcp(127.0.0.1:3306)/usercenter?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
 ```
 
 ```
